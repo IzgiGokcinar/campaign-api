@@ -22,14 +22,27 @@ public class CampaignController {
     public List<Campaign> getAllCampaigns() {
         return campaignService.getAllCampaigns();
     }
+    @GetMapping("/{id}")
+    public Campaign getCampaignById(@PathVariable Long id) {
+        return campaignService.getCampaignById(id);
+    }
 
     @PostMapping
     public Campaign createCampaign(@RequestBody Campaign campaign) {
         return campaignService.createCampaign(campaign);
+    }
+    @PutMapping("/{id}")
+    public Campaign updateCampaign(@PathVariable Long id, @RequestBody Campaign updatedCampaign) {
+        return campaignService.updateCampaign(id, updatedCampaign);
     }
 
     @PutMapping("/{id}/status")
     public Campaign updateStatus(@PathVariable Long id, @RequestParam String status) {
         return campaignService.updateStatus(id, status);
     }
+    @DeleteMapping("/{id}")
+    public void deleteCampaign(@PathVariable Long id) {
+        campaignService.deleteCampaign(id);
+    }
+
 }

@@ -20,6 +20,10 @@ public class CampaignService {
     public List<Campaign> getAllCampaigns() {
         return campaignRepository.findAll();
     }
+    public Campaign getCampaignById(Long id) {
+        return campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
+    }
 
     public Campaign createCampaign(Campaign campaign) {
         boolean exists = campaignRepository.existsByTitleAndDescriptionAndCategory(
@@ -40,6 +44,17 @@ public class CampaignService {
 
         return campaignRepository.save(campaign);
     }
+    public Campaign updateCampaign(Long id, Campaign updatedCampaign) {
+        Campaign existing = campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
+
+        existing.setTitle(updatedCampaign.getTitle());
+        existing.setDescription(updatedCampaign.getDescription());
+        existing.setCategory(updatedCampaign.getCategory());
+        existing.setStatus(updatedCampaign.getStatus());
+
+        return campaignRepository.save(existing);
+    }
 
     public Campaign updateStatus(Long id, String status) {
         Campaign campaign = campaignRepository.findById(id).orElseThrow(
@@ -50,7 +65,11 @@ public class CampaignService {
             campaign.setStatus(status);
             return campaignRepository.save(campaign);
         }
-
         return campaign;
+    }
+    public void deleteCampaign(Long id) {
+        Campaign campaign = campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
+        campaignRepository.delete(campaign);
     }
 }
