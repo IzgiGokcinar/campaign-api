@@ -2,6 +2,9 @@ package com.nevitech.campaign_api.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Campaign {
@@ -10,12 +13,22 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Başlık boş olamaz")
+    @Size(min = 10, max = 50, message = "Başlık 10-50 karakter arasında olmalı")
+    @Pattern(regexp = "^[\\p{L}\\p{N}].*", message = "Başlık harf veya rakam ile başlamalı")
     @Column(nullable = false, length = 50)
     private String title;
 
+    @NotBlank(message = "Açıklama boş olamaz")
+    @Size(min = 20, max = 200, message = "Açıklama 20-200 karakter arasında olmalı")
     @Column(nullable = false, length = 200)
     private String description;
 
+    @NotBlank(message = "Kategori boş olamaz")
+    @Pattern(
+            regexp = "^(Tamamlayıcı Sağlık Sigortası|TSS|Özel Sağlık Sigortası|ÖSS|Hayat Sigortası|Diğer)$",
+            message = "Geçerli bir kategori giriniz"
+    )
     @Column(nullable = false)
     private String category;
 
@@ -73,4 +86,3 @@ public class Campaign {
         this.createdAt = createdAt;
     }
 }
-

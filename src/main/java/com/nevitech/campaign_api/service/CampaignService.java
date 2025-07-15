@@ -5,7 +5,10 @@ import com.nevitech.campaign_api.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class CampaignService {
@@ -72,4 +75,20 @@ public class CampaignService {
                 .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
         campaignRepository.delete(campaign);
     }
+    public Map<String, Long> getCampaignStatusStatistics() {
+        return campaignRepository.findAll().stream()
+                .collect(Collectors.groupingBy(Campaign::getStatus, Collectors.counting()));
+    }
+    public Map<String, Long> getCampaignStatistics() {
+        List<Object[]> results = campaignRepository.countCampaignsByStatus();
+        Map<String, Long> stats = new HashMap<>();
+        for (Object[] result : results) {
+            String status = (String) result[0];
+            Long count = (Long) result[1];
+            stats.put(status, count);
+        }
+        return stats;
+    }
+
+
 }

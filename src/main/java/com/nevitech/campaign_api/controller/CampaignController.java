@@ -5,7 +5,9 @@ import com.nevitech.campaign_api.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/campaigns")
@@ -28,7 +30,7 @@ public class CampaignController {
     }
 
     @PostMapping
-    public Campaign createCampaign(@RequestBody Campaign campaign) {
+    public Campaign createCampaign(@RequestBody @Valid Campaign campaign) {
         return campaignService.createCampaign(campaign);
     }
     @PutMapping("/{id}")
@@ -43,6 +45,14 @@ public class CampaignController {
     @DeleteMapping("/{id}")
     public void deleteCampaign(@PathVariable Long id) {
         campaignService.deleteCampaign(id);
+    }
+    @GetMapping("/statistics")
+    public Map<String, Long> getCampaignStatistics() {
+        return campaignService.getCampaignStatusStatistics();
+    }
+    @GetMapping("/dashboard/classifieds/statistics")
+    public Map<String, Long> getStatistics() {
+        return campaignService.getCampaignStatistics();
     }
 
 }
