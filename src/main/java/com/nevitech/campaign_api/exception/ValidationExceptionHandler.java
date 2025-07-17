@@ -30,6 +30,13 @@ import java.util.Map;
             error.put("error", "Geçersiz HTTP methodu: " + ex.getMethod());
             return new ResponseEntity<>(error, HttpStatus.METHOD_NOT_ALLOWED);
         }
+        @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
+        public ResponseEntity<Map<String, String>> handleIllegalExceptions(RuntimeException ex) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", ex.getMessage());
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
 
     }
 

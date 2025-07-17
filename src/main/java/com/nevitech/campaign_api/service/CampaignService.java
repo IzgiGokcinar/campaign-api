@@ -1,10 +1,13 @@
 package com.nevitech.campaign_api.service;
 
 import com.nevitech.campaign_api.model.Campaign;
+import com.nevitech.campaign_api.model.CampaignStatusHistory;
 import com.nevitech.campaign_api.repository.CampaignRepository;
+import com.nevitech.campaign_api.repository.CampaignStatusHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,15 +17,19 @@ import java.util.stream.Collectors;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final CampaignStatusHistoryRepository historyRepository;
 
     @Autowired
-    public CampaignService(CampaignRepository campaignRepository) {
+    public CampaignService(CampaignRepository campaignRepository,
+                           CampaignStatusHistoryRepository historyRepository) {
         this.campaignRepository = campaignRepository;
+        this.historyRepository = historyRepository;
     }
 
     public List<Campaign> getAllCampaigns() {
         return campaignRepository.findAll();
     }
+
     public Campaign getCampaignById(Long id) {
         return campaignRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
@@ -47,38 +54,49 @@ public class CampaignService {
 
         return campaignRepository.save(campaign);
     }
-    public Campaign updateCampaign(Long id, Campaign updatedCampaign) {
-        Campaign existing = campaignRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
 
-        existing.setTitle(updatedCampaign.getTitle());
-        existing.setDescription(updatedCampaign.getDescription());
-        existing.setCategory(updatedCampaign.getCategory());
-        existing.setStatus(updatedCampaign.getStatus());
+    public Campaign updateCampaignStatus(Long id, String newStatus) {
+        Campaign campaign = campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Kampanya bulunamadı"));
 
-        return campaignRepository.save(existing);
-    }
-
-    public Campaign updateStatus(Long id, String status) {
-        Campaign campaign = campaignRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Kampanya bulunamadı: " + id)
-        );
-
-        if (!"Mükerrer".equalsIgnoreCase(campaign.getStatus())) {
-            campaign.setStatus(status);
-            return campaignRepository.save(campaign);
+        if (campaign.getStatus().equalsIgnoreCase("Mükerrer")) {
+            throw new IllegalStateException("Mükerrer kampanyanın durumu güncellenemez");
         }
-        return campaign;
+
+        if (!List.of("Aktif", "Pasif", "Deaktif", "Onay Bekliyor", "Mükerrer").contains(newStatus)) {
+            throw new IllegalArgumentException("Geçersiz durum: " + newStatus);
+        }
+
+        String oldStatus = campaign.getStatus();
+        campaign.setStatus(newStatus);
+        Campaign updated = campaignRepository.save(campaign);
+
+        // Durum geçmişine kayıt
+        CampaignStatusHistory history = new CampaignStatusHistory();
+        history.setCampaignId(campaign.getId());
+        history.setOldStatus(oldStatus);
+        history.setNewStatus(newStatus);
+        history.setChangedAt(LocalDateTime.now());
+        historyRepository.save(history);
+
+        return updated;
     }
+
+    public List<CampaignStatusHistory> getStatusHistoryByCampaignId(Long campaignId) {
+        return historyRepository.findByCampaignIdOrderByChangedAtAsc(campaignId);
+    }
+
     public void deleteCampaign(Long id) {
         Campaign campaign = campaignRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Campaign not found with id: " + id));
         campaignRepository.delete(campaign);
     }
+
     public Map<String, Long> getCampaignStatusStatistics() {
         return campaignRepository.findAll().stream()
                 .collect(Collectors.groupingBy(Campaign::getStatus, Collectors.counting()));
     }
+
     public Map<String, Long> getCampaignStatistics() {
         List<Object[]> results = campaignRepository.countCampaignsByStatus();
         Map<String, Long> stats = new HashMap<>();
@@ -89,6 +107,4 @@ public class CampaignService {
         }
         return stats;
     }
-
-
 }

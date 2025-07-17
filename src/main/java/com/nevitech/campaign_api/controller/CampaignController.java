@@ -3,7 +3,9 @@ package com.nevitech.campaign_api.controller;
 import com.nevitech.campaign_api.model.Campaign;
 import com.nevitech.campaign_api.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.nevitech.campaign_api.model.CampaignStatusHistory;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,6 +26,7 @@ public class CampaignController {
     public List<Campaign> getAllCampaigns() {
         return campaignService.getAllCampaigns();
     }
+
     @GetMapping("/{id}")
     public Campaign getCampaignById(@PathVariable Long id) {
         return campaignService.getCampaignById(id);
@@ -33,26 +36,32 @@ public class CampaignController {
     public Campaign createCampaign(@RequestBody @Valid Campaign campaign) {
         return campaignService.createCampaign(campaign);
     }
-    @PutMapping("/{id}")
-    public Campaign updateCampaign(@PathVariable Long id, @RequestBody Campaign updatedCampaign) {
-        return campaignService.updateCampaign(id, updatedCampaign);
-    }
 
     @PutMapping("/{id}/status")
-    public Campaign updateStatus(@PathVariable Long id, @RequestParam String status) {
-        return campaignService.updateStatus(id, status);
+    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam String status) {
+        Campaign updatedCampaign = campaignService.updateCampaignStatus(id, status);
+        return ResponseEntity.ok(updatedCampaign);
     }
+
     @DeleteMapping("/{id}")
     public void deleteCampaign(@PathVariable Long id) {
         campaignService.deleteCampaign(id);
     }
+
     @GetMapping("/statistics")
     public Map<String, Long> getCampaignStatistics() {
         return campaignService.getCampaignStatusStatistics();
     }
+
     @GetMapping("/dashboard/classifieds/statistics")
     public Map<String, Long> getStatistics() {
         return campaignService.getCampaignStatistics();
     }
+
+    @GetMapping("/{id}/status-history")
+    public List<CampaignStatusHistory> getCampaignStatusHistory(@PathVariable Long id) {
+        return campaignService.getStatusHistoryByCampaignId(id);
+    }
+
 
 }
