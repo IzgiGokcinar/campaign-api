@@ -3,6 +3,7 @@ package com.nevitech.campaign_api.controller;
 import com.nevitech.campaign_api.model.Campaign;
 import com.nevitech.campaign_api.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.nevitech.campaign_api.model.CampaignStatusHistory;
@@ -33,8 +34,9 @@ public class CampaignController {
     }
 
     @PostMapping
-    public Campaign createCampaign(@RequestBody @Valid Campaign campaign) {
-        return campaignService.createCampaign(campaign);
+    public ResponseEntity<Campaign> createCampaign(@RequestBody @Valid Campaign campaign) {
+        Campaign saved = campaignService.createCampaign(campaign);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}/status")
@@ -62,6 +64,5 @@ public class CampaignController {
     public List<CampaignStatusHistory> getCampaignStatusHistory(@PathVariable Long id) {
         return campaignService.getStatusHistoryByCampaignId(id);
     }
-
 
 }

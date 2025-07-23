@@ -71,7 +71,6 @@ public class CampaignService {
         campaign.setStatus(newStatus);
         Campaign updated = campaignRepository.save(campaign);
 
-        // Durum geçmişine kayıt
         CampaignStatusHistory history = new CampaignStatusHistory();
         history.setCampaignId(campaign.getId());
         history.setOldStatus(oldStatus);

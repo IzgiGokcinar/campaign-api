@@ -27,8 +27,6 @@ public class CampaignStatusHistory {
         this.changedAt = changedAt;
     }
 
-    // Getters & Setters
-
     public Long getId() {
         return id;
     }
