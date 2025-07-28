@@ -36,7 +36,7 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
   <img width="1890" height="848" alt="Ekran görüntüsü 2025-07-28 175934" src="https://github.com/user-attachments/assets/45ee8207-d345-4d65-ad36-f9cc61259359" />
 
 
-- Kampanyalar şık kart yapıları ile sütunlu grid olarak listelenir.
+- Kampanyalar kart yapıları ile sütunlu grid olarak listelenir.
 
   <img width="581" height="231" alt="image" src="https://github.com/user-attachments/assets/daa918d0-1349-414f-be2c-01ea65d00e04" />
 
