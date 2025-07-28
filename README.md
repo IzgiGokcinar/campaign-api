@@ -84,3 +84,6 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 - Projenin backendinde yer alan komutlar için Postman kullanıldı.
 - Postman Testleri ile proje test edildi.
 - Postman dökümantasyon linki: https://izgigokcinar-2380569.postman.co/workspace/Izgi-Gokcinar's-Workspace~6e061698-ad25-43a8-861b-c9161687ba8b/collection/47009204-95eb8d4a-36bc-4d96-98c1-368421230525?action=share&creator=47009204
+
+  <img width="1348" height="675" alt="image" src="https://github.com/user-attachments/assets/ae286f6c-51e4-4d3a-942f-cf7ee5a67caa" />
+  
