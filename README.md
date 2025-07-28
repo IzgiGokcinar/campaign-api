@@ -8,16 +8,23 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 # Proje Özellikleri
 
 ### 👤 Yönetici Paneli
-- Yeni kampanya ekleme (başlık, açıklama, kategori, durum).
-- Kampanya durumunu değiştirme (Aktif, Pasif, Onay Bekliyor).
+<img width="1846" height="844" alt="Ekran görüntüsü 2025-07-28 175755" src="https://github.com/user-attachments/assets/ed3c084a-8c59-40f7-ab36-cb6e7f0931ff" />
+
+- Yeni kampanya ekleme (başlık, açıklama, kategori, durum).<img width="1872" height="499" alt="Ekran görüntüsü 2025-07-28 175807" src="https://github.com/user-attachments/assets/f4c9a30b-ae54-4ee0-884a-2477f1361813" />
+
+- Kampanya durumunu değiştirme (Aktif, Pasif, Onay Bekliyor).<img width="778" height="349" alt="Ekran görüntüsü 2025-07-28 175838" src="https://github.com/user-attachments/assets/4dd0141d-b870-4ecd-b1aa-b3ec84919708" />
+
 - Kampanyayı silme.
-- Kampanya durumu değiştiğinde "Kaydet" butonu ile veri güncelleme.
+- Kampanya durumu değiştiğinde "Kaydet" butonu ile veri güncelleme.<img width="1863" height="707" alt="Ekran görüntüsü 2025-07-28 175821" src="https://github.com/user-attachments/assets/fa75d410-1418-4e4d-b145-10851ee25b61" />
+
 - Aynı kampanyadan tekrar eklenmesi durumunda “Mükerrer” olarak işaretleme.
 - Kampanya durum geçmişini takip etme (backend'de hazır, frontend'e entegre edilebilir).
 
 ### 👥 Kullanıcı Paneli
-- Sadece **Aktif** durumdaki kampanyaları görür.
-- Kampanyalar şık kart yapıları ile 2 sütunlu grid olarak listelenir.
+- Sadece **Aktif** durumdaki kampanyaları görür.<img width="1890" height="848" alt="Ekran görüntüsü 2025-07-28 175934" src="https://github.com/user-attachments/assets/45ee8207-d345-4d65-ad36-f9cc61259359" />
+
+- Kampanyalar şık kart yapıları ile sütunlu grid olarak listelenir. <img width="581" height="231" alt="image" src="https://github.com/user-attachments/assets/daa918d0-1349-414f-be2c-01ea65d00e04" />
+
 - Her kampanya: başlık, açıklama ve kategori içerir.
 - Kampanya durumu yönetici tarafından "Aktif" yapıldığında kullanıcı arayüzüne otomatik yansır.
 
@@ -56,7 +63,7 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 4. Uygulama varsayılan olarak http://localhost:4200 portunda çalışacak.
 
 
-## POSTMAN 
+## Postman
 
 - Projenin backendinde yer alan komutlar için Postman kullanıldı.
 - Postman Testleri ile proje test edildi.
