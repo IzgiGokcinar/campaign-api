@@ -1,0 +1,118 @@
+.admin-panel {
+  padding: 2rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .add-campaign {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+
+      input,
+      textarea,
+      select {
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-width: 220px;
+        font-size: 0.95rem;
+      }
+
+      button {
+        background-color: gray;
+        color: white;
+        padding: 0.6rem 1.4rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background-color: dimgray;
+        }
+      }
+    }
+  }
+
+  .campaign-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .campaign-card {
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      padding: 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+
+      h4 {
+        margin-bottom: 0.6rem;
+        font-size: 1.2rem;
+      }
+
+      p {
+        margin: 0.3rem 0;
+        font-size: 0.95rem;
+
+        strong {
+          font-weight: 600;
+        }
+      }
+
+      select {
+        margin-left: 0.5rem;
+        padding: 0.4rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+
+      .delete {
+        margin-top: 0.7rem;
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+
+        &:hover {
+          background: #b02a37;
+        }
+      }
+      button.save {
+        margin-left: 0.5rem;
+        background-color: #007bff;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+}
+
+

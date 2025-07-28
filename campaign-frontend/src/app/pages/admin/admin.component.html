@@ -1,0 +1,55 @@
+<div class="admin-panel">
+  <h2>Yönetici Paneli</h2>
+
+  <div class="add-campaign">
+    <h3>Kampanya Ekle</h3>
+    <form (ngSubmit)="addCampaign()" #campaignForm="ngForm" class="campaign-form">
+      <input
+        type="text"
+        [(ngModel)]="newCampaign.title"
+        name="title"
+        placeholder="Kampanya Adı"
+        required
+      />
+      <textarea
+        [(ngModel)]="newCampaign.description"
+        name="description"
+        placeholder="Açıklama"
+        required
+      ></textarea>
+      <select [(ngModel)]="newCampaign.category" name="category" required>
+        <option value="TSS">TSS</option>
+        <option value="ÖSS">ÖSS</option>
+        <option value="Hayat Sigortası">Hayat Sigortası</option>
+        <option value="Diğer">Diğer</option>
+      </select>
+      <select [(ngModel)]="newCampaign.status" name="status" required>
+        <option value="Aktif">Aktif</option>
+        <option value="Pasif">Pasif</option>
+        <option value="Onay Bekliyor">Onay Bekliyor</option>
+      </select>
+      <button type="submit" [disabled]="!campaignForm.form.valid">Kampanya Ekle</button>
+    </form>
+  </div>
+
+  <h3>Mevcut Kampanyalar</h3>
+  <div class="campaign-list">
+    <div *ngFor="let campaign of campaigns" class="campaign-card">
+      <h4>{{ campaign.title }}</h4>
+      <p><strong>Açıklama:</strong> {{ campaign.description }}</p>
+      <p><strong>Kategori:</strong> {{ campaign.category }}</p>
+      <p><strong>Durum:</strong> {{ campaign.status }}</p>
+      <label>
+        Durumu Değiştir:
+        <select [(ngModel)]="campaign.status" (change)="changeStatus(campaign, campaign.status)">
+          <option value="Aktif">Aktif</option>
+          <option value="Pasif">Pasif</option>
+          <option value="Onay Bekliyor">Onay Bekliyor</option>
+        </select>
+        &nbsp;
+      </label>
+      <button class="delete" (click)="deleteCampaign(campaign.id)">Sil</button>&nbsp;
+      <button class="save" (click)="saveCampaign(campaign)">Kaydet</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<header class="app-header">
+  <div class="brand"><strong>Sigorta Kampanya Portalı</strong></div>
+
+  <button *ngIf="!authService.isLoggedIn()" routerLink="/login" class="admin-button">
+    Yönetici Girişi
+  </button>
+
+
+  <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-button">
+    Oturumu Kapat
+  </button>
+</header>
+
+
+

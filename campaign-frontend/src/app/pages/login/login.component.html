@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>Yönetici Girişi</h2>
+  <form #loginForm="ngForm" (ngSubmit)="login()">
+    <label>
+      E-posta:
+      <input type="email" name="email" [(ngModel)]="email" required />
+    </label>
+    <br />
+    <label>
+      Şifre:
+      <input type="password" name="password" [(ngModel)]="password" required />
+    </label>
+    <br />
+    <button type="submit">Giriş Yap</button>
+  </form>
+  <p *ngIf="loginError" style="color: red;">E-posta veya şifre hatalı.</p>
+</div>
