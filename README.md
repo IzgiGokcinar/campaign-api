@@ -73,6 +73,7 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 1. Proje dizinine git:  cd campaign-api
 2. Projeyi başlat: mvn spring-boot:run
 3. Uygulama varsayılan olarak http://localhost:9090 portunda çalışacak.
+4. Kampanyaları görüntülemek için: http://localhost:9090/api/campaigns 
 
 ### Frontend (Angular)
 1. Proje dizinine git: cd campaign-frontend
