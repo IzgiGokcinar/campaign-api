@@ -9,6 +9,8 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 
 ### 👤 Yönetici Paneli
 
+- Yönetici 'yonetici@gmail.com' mail adresi ve 'yönetici.sigorta' şifresi ile panele giriş sağlar.
+
 <img width="1846" height="844" alt="Ekran görüntüsü 2025-07-28 175755" src="https://github.com/user-attachments/assets/ed3c084a-8c59-40f7-ab36-cb6e7f0931ff" />
 
 - Yeni kampanya ekleme (başlık, açıklama, kategori, durum).
@@ -86,4 +88,8 @@ Bu proje, sigorta şirketlerinin kampanyalarını yönetebileceği ve son kullan
 - Postman dökümantasyon linki: https://izgigokcinar-2380569.postman.co/workspace/Izgi-Gokcinar's-Workspace~6e061698-ad25-43a8-861b-c9161687ba8b/collection/47009204-95eb8d4a-36bc-4d96-98c1-368421230525?action=share&creator=47009204
 
   <img width="1348" height="675" alt="image" src="https://github.com/user-attachments/assets/ae286f6c-51e4-4d3a-942f-cf7ee5a67caa" />
+  
+## NOT
+- Projenin backend ve frontend kısmı entegre çalıştığından yeni bir kampanya ekleneceği zaman önce yeni kampanya Postman'de yapılan POST işlemi ile sisteme dahil edilir.
+- Sonrasında tarayıcıdan aynı kampanya eklenerek müşterinin ekranında gözükmesi sağlanır.
   
